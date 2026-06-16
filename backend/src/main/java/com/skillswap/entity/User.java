@@ -99,15 +99,23 @@ public class User {
 
     public int getProfileCompletionPercentage() {
         int score = 0;
-        if (name != null && !name.isEmpty()) score += 10;
-        if (bio != null && !bio.isEmpty()) score += 15;
-        if (college != null && !college.isEmpty()) score += 10;
-        if (branch != null && !branch.isEmpty()) score += 10;
-        if (location != null && !location.isEmpty()) score += 10;
-        if (profileImage != null && !profileImage.isEmpty()) score += 15;
-        if (githubUrl != null && !githubUrl.isEmpty()) score += 10;
-        if (linkedinUrl != null && !linkedinUrl.isEmpty()) score += 10;
-        if (skills != null && !skills.isEmpty()) score += 10;
+        if (name != null && !name.isEmpty())
+            score += 10;
+        if (bio != null && !bio.isEmpty())
+            score += 15;
+        if (college != null && !college.isEmpty())
+            score += 10;
+        if (branch != null && !branch.isEmpty())
+            score += 10;
+        if (location != null && !location.isEmpty())
+            score += 10;
+        if (profileImage != null && !profileImage.isEmpty())
+            score += 15;
+        if (githubUrl != null && !githubUrl.isEmpty())
+            score += 10;
+        if (linkedinUrl != null && !linkedinUrl.isEmpty())
+            score += 10;
+        // if (skills != null && !skills.isEmpty()) score += 10;
         return score;
     }
 }
