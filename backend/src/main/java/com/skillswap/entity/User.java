@@ -79,11 +79,11 @@ public class User {
     @Builder.Default
     private List<Skill> skills = new ArrayList<>();
 
-    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Builder.Default
     private List<SkillRequest> sentRequests = new ArrayList<>();
 
-    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Builder.Default
     private List<SkillRequest> receivedRequests = new ArrayList<>();
 
