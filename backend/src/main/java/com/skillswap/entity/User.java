@@ -75,7 +75,7 @@ public class User {
     private String achievements;
     private String certifications;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Builder.Default
     private List<Skill> skills = new ArrayList<>();
 
