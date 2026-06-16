@@ -1,5 +1,5 @@
 package com.skillswap.exception;
-
+import com.skillswap.dto.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.security.access.AccessDeniedException;
@@ -74,4 +74,5 @@ public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex, WebRequ
 
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body(new ErrorResponse(500, "An internal server error occurred", LocalDateTime.now()));
+}
 }
