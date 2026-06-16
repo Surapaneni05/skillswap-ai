@@ -44,7 +44,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ErrorResponse> handleBadCredentialsException(BadCredentialsException ex) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                .body(new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), "Invalid email or password", LocalDateTime.now()));
+                .body(new ErrorResponse(HttpStatus.UNAUTHORIZED.value(), "Invalid email or password",
+                        LocalDateTime.now()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -63,11 +64,14 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex, WebRequest request) {
-        log.error("Unhandled exception: ", ex);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(new ErrorResponse(500, "An internal server error occurred", LocalDateTime.now()));
-    }
+public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex, WebRequest request) {
 
-    public record ErrorResponse(int status, String message, LocalDateTime timestamp) {}
+    log.error("====================================");
+    log.error("Exception Type: {}", ex.getClass().getName());
+    log.error("Exception Message: {}", ex.getMessage());
+    ex.printStackTrace();
+    log.error("====================================");
+
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(new ErrorResponse(500, "An internal server error occurred", LocalDateTime.now()));
 }
