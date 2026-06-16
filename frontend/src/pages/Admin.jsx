@@ -3,17 +3,17 @@ import { adminAPI } from '../api'
 import { motion } from 'framer-motion'
 import toast from 'react-hot-toast'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
-import { RiShieldLine, RiUserLine, RiLockLine, RiDeleteBin6Line, RiUnlockLine } from 'react-icons/ri'
+import { RiShieldLine, RiUserLine, RiLockLine, RiDeleteBinLine } from 'react-icons/ri'
 import { useNavigate } from 'react-router-dom'
 
-const COLORS = ['#6366f1','#10b981','#f59e0b','#ef4444','#8b5cf6']
+const COLORS = ['#6366f1', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6']
 
 export default function AdminDashboard() {
   const [analytics, setAnalytics] = useState(null)
-  const [users, setUsers]         = useState([])
+  const [users, setUsers] = useState([])
   const [topSkills, setTopSkills] = useState([])
-  const [tab, setTab]             = useState('overview')
-  const [loading, setLoading]     = useState(true)
+  const [tab, setTab] = useState('overview')
+  const [loading, setLoading] = useState(true)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function AdminDashboard() {
   const blockUser = async (id, isActive) => {
     try {
       if (isActive) await adminAPI.blockUser(id)
-      else          await adminAPI.unblockUser(id)
+      else await adminAPI.unblockUser(id)
       toast.success(isActive ? 'User blocked' : 'User unblocked')
       const { data } = await adminAPI.getUsers()
       setUsers(data)
@@ -42,11 +42,11 @@ export default function AdminDashboard() {
   if (loading) return <div className="flex justify-center pt-20"><div className="w-10 h-10 border-4 border-primary-500 border-t-transparent rounded-full animate-spin" /></div>
 
   const statCards = [
-    { label: 'Total Users',       value: analytics?.totalUsers,     color: '#6366f1' },
-    { label: 'Active Users',      value: analytics?.activeUsers,    color: '#10b981' },
-    { label: 'Total Sessions',    value: analytics?.totalSessions,  color: '#f59e0b' },
-    { label: 'Completed Sessions',value: analytics?.completedSessions, color: '#8b5cf6' },
-    { label: 'Total Skills',      value: analytics?.totalSkills,    color: '#ef4444' },
+    { label: 'Total Users', value: analytics?.totalUsers, color: '#6366f1' },
+    { label: 'Active Users', value: analytics?.activeUsers, color: '#10b981' },
+    { label: 'Total Sessions', value: analytics?.totalSessions, color: '#f59e0b' },
+    { label: 'Completed Sessions', value: analytics?.completedSessions, color: '#8b5cf6' },
+    { label: 'Total Skills', value: analytics?.totalSkills, color: '#ef4444' },
   ]
 
   const pieData = [
@@ -70,7 +70,7 @@ export default function AdminDashboard() {
       <div className="max-w-7xl mx-auto p-6 space-y-8">
         {/* Tabs */}
         <div className="flex gap-2 border-b border-white/10 pb-px">
-          {['overview','users'].map(t => (
+          {['overview', 'users'].map(t => (
             <button key={t} onClick={() => setTab(t)}
               className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors capitalize ${tab === t ? 'border-primary-500 text-primary-400' : 'border-transparent text-slate-500 hover:text-slate-300'}`}>
               {t}
@@ -95,12 +95,12 @@ export default function AdminDashboard() {
               <div className="glass-dark p-6 border border-white/10">
                 <h2 className="font-display font-semibold text-white mb-4">Top Skills</h2>
                 <ResponsiveContainer width="100%" height={250}>
-                  <BarChart data={topSkills.slice(0,8).map(([name, count]) => ({ name, count }))}>
+                  <BarChart data={topSkills.slice(0, 8).map(([name, count]) => ({ name, count }))}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
                     <XAxis dataKey="name" tick={{ fill: '#64748b', fontSize: 11 }} axisLine={false} />
                     <YAxis tick={{ fill: '#64748b', fontSize: 11 }} axisLine={false} />
                     <Tooltip contentStyle={{ background: '#1e293b', border: '1px solid rgba(255,255,255,0.1)', borderRadius: 12 }} />
-                    <Bar dataKey="count" fill="#6366f1" radius={[4,4,0,0]} />
+                    <Bar dataKey="count" fill="#6366f1" radius={[4, 4, 0, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -116,7 +116,7 @@ export default function AdminDashboard() {
                   </PieChart>
                 </ResponsiveContainer>
                 <div className="flex gap-4 mt-2">
-                  {pieData.map((d, i) => <div key={i} className="flex items-center gap-1.5 text-xs"><div className="w-3 h-3 rounded-full" style={{ background: COLORS[i] }}/><span className="text-slate-400">{d.name}: {d.value}</span></div>)}
+                  {pieData.map((d, i) => <div key={i} className="flex items-center gap-1.5 text-xs"><div className="w-3 h-3 rounded-full" style={{ background: COLORS[i] }} /><span className="text-slate-400">{d.name}: {d.value}</span></div>)}
                 </div>
               </div>
             </div>
@@ -130,7 +130,7 @@ export default function AdminDashboard() {
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-white/10 text-left">
-                    {['User','Email','Role','Status','Credits','Rating','Actions'].map(h => (
+                    {['User', 'Email', 'Role', 'Status', 'Credits', 'Rating', 'Actions'].map(h => (
                       <th key={h} className="px-4 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">{h}</th>
                     ))}
                   </tr>
@@ -154,7 +154,7 @@ export default function AdminDashboard() {
                           <button onClick={() => blockUser(u.id, u.isActive)}
                             className={`p-1.5 rounded-lg transition-colors ${u.isActive ? 'text-amber-400 hover:bg-amber-400/10' : 'text-green-400 hover:bg-green-400/10'}`}
                             title={u.isActive ? 'Block' : 'Unblock'}>
-                            {u.isActive ? <RiLockLine className="w-4 h-4" /> : <RiUnlockLine className="w-4 h-4" />}
+                            {u.isActive ? <RiLockLine className="w-4 h-4" /> : <RilockLine className="w-4 h-4" />}
                           </button>
                           <button onClick={() => deleteUser(u.id)}
                             className="p-1.5 rounded-lg text-red-400 hover:bg-red-400/10 transition-colors" title="Delete">
